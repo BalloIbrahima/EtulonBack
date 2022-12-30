@@ -2,9 +2,6 @@ package com.odc.backend.Controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +38,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    //private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     AuthenticationManager authenticationManager;
