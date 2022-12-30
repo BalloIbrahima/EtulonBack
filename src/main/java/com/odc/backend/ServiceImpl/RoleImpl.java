@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.odc.backend.Models.ERole;
 import com.odc.backend.Models.Role;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Service.RoleService;
@@ -43,6 +44,12 @@ public class RoleImpl implements RoleService{
     public List<Role> getAllRole() {
         // TODO Auto-generated method stub
         return roleRepository.findAll();
+    }
+
+    @Override
+    public Role parNomRole(ERole role) {
+        // TODO Auto-generated method stub
+        return roleRepository.findByName(role);
     }
     
 }

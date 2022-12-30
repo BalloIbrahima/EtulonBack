@@ -23,6 +23,12 @@ public interface UserService {
     // Methode pour retrouver un user a travers son username
     User getByUsername(String username);
 
-     // Methode pour retrouver un user a travers son adresse email
-     User getByEmail(String email);
+    // Methode pour retrouver un user a travers son adresse email
+    User getByEmail(String email);
+
+    //Liste des administrateurs
+    List<User> getAllAdmin();
+
+    //Liste des citoyens
+    List<User> getAllCitoyen();
 }

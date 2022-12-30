@@ -2,6 +2,7 @@ package com.odc.backend.Service;
 
 import java.util.List;
 
+import com.odc.backend.Models.ERole;
 import com.odc.backend.Models.Role;
 
 public interface RoleService {
@@ -19,4 +20,7 @@ public interface RoleService {
 
     // Methode pour la liste des roles à partir d'un role
     List<Role> getAllRole();
+
+    //Retrouver par nom
+    Role parNomRole(ERole role);
 }

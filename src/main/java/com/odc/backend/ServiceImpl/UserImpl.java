@@ -1,11 +1,17 @@
 package com.odc.backend.ServiceImpl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.odc.backend.Models.ERole;
+import com.odc.backend.Models.Role;
 import com.odc.backend.Models.User;
+import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Repository.UserRepository;
 import com.odc.backend.Service.UserService;
 @Service
@@ -13,6 +19,9 @@ public class UserImpl implements UserService {
     
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @Override
     public User saveUser(User user) {
@@ -54,6 +63,24 @@ public class UserImpl implements UserService {
     public User getByEmail(String email) {
         // TODO Auto-generated method stub
         return userRepository.findByEmail(email).orElseThrow(() ->null);
+    }
+
+    @Override
+    public List<User> getAllAdmin() {
+        // TODO Auto-generated method stub
+        Set<Role> rechList=new HashSet<>(); 
+        Role admin=roleRepository.findByName(ERole.ROLE_ADMIN);
+        rechList.add(admin);
+        return userRepository.findByRoles(rechList);
+    }
+
+    @Override
+    public List<User> getAllCitoyen() {
+        // TODO Auto-generated method stub
+        Set<Role> rechList=new HashSet<>(); 
+        Role citoyen=roleRepository.findByName(ERole.ROLE_CITOYEN);
+        rechList.add(citoyen);
+        return userRepository.findByRoles(rechList);    
     }
 
     
