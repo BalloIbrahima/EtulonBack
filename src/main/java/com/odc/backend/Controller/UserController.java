@@ -13,7 +13,10 @@ import com.odc.backend.Configuration.SpringSecurity.Jwt.JwtUtils;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Service.UserService;
 
+import io.swagger.annotations.Api;
+
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@Api(value = "user", description = "Les actions reslisables par les users du systeme.")
 @RestController
 @RequestMapping("/user")
 public class UserController {
