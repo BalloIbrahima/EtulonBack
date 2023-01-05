@@ -37,6 +37,8 @@ public class User {
     private String username;
     @Column(unique = true)
     private String email;
+    private String telephone;
+
     private String photo;
     private String password;
     private Date dateSouscription;

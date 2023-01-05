@@ -11,6 +11,8 @@ public class SignupRequest {
     private String nom;
     private String prenom;
     private String username;
+    private String telephone;
+
     private String email;
     private String photo;
     private Date dateSouscription;

@@ -27,6 +27,7 @@ public class UserDetailsImpl implements UserDetails{
     private String nom;
     private String prenom;
     private String username;
+    private String telephone;
     private String email;
     private String photo;
     private Long point;
@@ -51,6 +52,7 @@ public class UserDetailsImpl implements UserDetails{
             user.getNom(),
             user.getPrenom(),
             user.getUsername(), 
+            user.getTelephone(),
             user.getEmail(),
             user.getPhoto(),
             user.getPoint(),
