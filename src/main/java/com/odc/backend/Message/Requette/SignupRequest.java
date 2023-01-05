@@ -1,5 +1,6 @@
 package com.odc.backend.Message.Requette;
 
+import java.util.Date;
 import java.util.Set;
 
 import lombok.Getter;
@@ -12,7 +13,8 @@ public class SignupRequest {
     private String username;
     private String email;
     private String photo;
-   
+    private Date dateSouscription;
+
     //
     private Long point;
     private Long niveau;

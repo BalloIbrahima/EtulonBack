@@ -1,5 +1,6 @@
 package com.odc.backend.Models;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -40,6 +41,8 @@ public class User {
     private String email;
     private String photo;
     private String password;
+    private Date dateSouscription;
+
 
     //
     private Long point;

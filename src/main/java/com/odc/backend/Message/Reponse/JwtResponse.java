@@ -1,5 +1,6 @@
 package com.odc.backend.Message.Reponse;
 
+import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
@@ -18,9 +19,11 @@ public class JwtResponse {
     private String prenom;
     private Long point;
     private Long niveau;
+    private Date dateSouscription;
+
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username,String email, String nom,String prenom, String photo,Long point, Long niveau,List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String username,String email, String nom,String prenom, String photo,Long point, Long niveau,Date dateSouscription,List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
@@ -31,5 +34,6 @@ public class JwtResponse {
         this.roles = roles;
         this.point=point;
         this.niveau=niveau;
+        this.dateSouscription=dateSouscription;
       }
 }

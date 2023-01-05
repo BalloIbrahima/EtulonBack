@@ -1,6 +1,7 @@
 package com.odc.backend.Configuration.SpringSecurity.Services;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,11 +29,11 @@ public class UserDetailsImpl implements UserDetails{
     private String username;
     private String email;
     private String photo;
-
     private Long point;
     private Long niveau;
     @JsonIgnore
     private String password;
+    private Date dateSouscription;
 
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -52,6 +53,7 @@ public class UserDetailsImpl implements UserDetails{
             user.getPoint(),
             user.getNiveau(),
             user.getPassword(), 
+            user.getDateSouscription(),
             authorities);
     }
 
