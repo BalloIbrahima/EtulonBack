@@ -12,8 +12,8 @@ public interface ConseilService {
     // Methode pour la modification d'un conseil
     Conseil updateConseil(Conseil conseil);
 
-     // Methode pour la recuperation d'un conseil
-     Conseil getConseil(Long id);
+    // Methode pour la recuperation d'un conseil
+    Conseil getConseil(Long id);
 
     // Methode pour la surpression d'un conseil à partir d'un conseil
     void deleteConseil(Conseil conseil);
