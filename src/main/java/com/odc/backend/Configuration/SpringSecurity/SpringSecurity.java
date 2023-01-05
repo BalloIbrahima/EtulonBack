@@ -63,10 +63,13 @@ public class SpringSecurity {
             .authorizeRequests()
             // .antMatchers("/region/get/**").permitAll()
             // .antMatchers("/pays/get/**").permitAll()
-            // .antMatchers("/admin/login").permitAll()
-            //.antMatchers("/logout").permitAll()
+            .antMatchers("/user/login").permitAll()
+            //.antMatchers("/user/listeCitoyen").permitAll()
+            .antMatchers("/logout").permitAll()
             .antMatchers("/swagger").permitAll()
+            .antMatchers("/swagger-ui.html").permitAll()
 
+            
             .anyRequest().authenticated();
 
         //http.formLogin();

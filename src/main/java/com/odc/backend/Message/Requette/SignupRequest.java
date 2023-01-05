@@ -13,6 +13,9 @@ public class SignupRequest {
     private String email;
     private String photo;
    
+    //
+    private Long point;
+    private Long niveau;
     private String password;
 
     private Set<String> role;

@@ -67,19 +67,35 @@ public class UserImpl implements UserService {
     @Override
     public List<User> getAllAdmin() {
         // TODO Auto-generated method stub
-        Set<Role> rechList=new HashSet<>(); 
+        //Set<Role> rechList=new HashSet<>(); 
         Role admin=roleRepository.findByName(ERole.ROLE_ADMIN);
-        rechList.add(admin);
-        return userRepository.findByRoles(rechList);
+        //rechList.add(admin);
+        return admin.getUsers();
     }
 
     @Override
     public List<User> getAllCitoyen() {
         // TODO Auto-generated method stub
-        Set<Role> rechList=new HashSet<>(); 
+        //Set<Role> rechList=new HashSet<>(); 
         Role citoyen=roleRepository.findByName(ERole.ROLE_CITOYEN);
-        rechList.add(citoyen);
-        return userRepository.findByRoles(rechList);    
+        //rechList.add(citoyen);
+        return citoyen.getUsers(); 
+    }
+
+    @Override
+    public Long NombreAdmin() {
+        // TODO Auto-generated method stub
+        Role admin=roleRepository.findByName(ERole.ROLE_ADMIN);
+        Role superadmin=roleRepository.findByName(ERole.ROLE_SUPERADMIN);
+
+        return  (long) (admin.getUsers().size() + superadmin.getUsers().size());
+    }
+
+    @Override
+    public Long NombreCitoyen() {
+        // TODO Auto-generated method stub
+        Role citoyen=roleRepository.findByName(ERole.ROLE_CITOYEN);
+        return (long) citoyen.getUsers().size(); 
     }
 
     

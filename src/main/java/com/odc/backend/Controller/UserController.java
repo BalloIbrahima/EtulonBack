@@ -75,7 +75,7 @@ public class UserController {
             .collect(Collectors.toList());
 
         /////////////////
-        return ResponseMessage.generateResponse("ok", HttpStatus.OK, new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail(), userDetails.getNom(), userDetails.getPrenom(), userDetails.getPhoto(), roles));
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail(), userDetails.getNom(), userDetails.getPrenom(), userDetails.getPhoto(),userDetails.getPoint(),userDetails.getNiveau(), roles));
     }
     // Fin
     
@@ -155,12 +155,44 @@ public class UserController {
     }
     // Fin
 
+    // Nombre d'admins
+    @ApiOperation(value = "Récuperation du nombre d'admins.")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
+    @GetMapping("/nbre/admin")
+    public ResponseEntity<Object> NombreAdmin(Authentication authentication) {
+
+        try {
+            return ResponseMessage.generateResponse("Le nombre d'admins:", HttpStatus.OK, userService.NombreAdmin());
+
+        } catch (Exception e) {
+            return ResponseMessage.generateResponse("Erreur lors du retour du nombre d'admins.", HttpStatus.OK, null);
+        }
+
+    }
+    // Fin
+
+    // Nombre de citoyen
+    @ApiOperation(value = "Récuperation du nombre de citoyen.")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
+    @GetMapping("/nbre/citoyen")
+    public ResponseEntity<Object> NombreCitoyen(Authentication authentication) {
+
+        try {
+            return ResponseMessage.generateResponse("Le nombre de citoyen:", HttpStatus.OK, userService.NombreCitoyen());
+
+        } catch (Exception e) {
+            return ResponseMessage.generateResponse("Erreur lors du retour du nombre de citoyen.", HttpStatus.OK, null);
+        }
+
+    }
+    // Fin
+
 
     // methode pour la liste des Citoyens
     @ApiOperation(value = "Récuperation de la liste des citoyens.")
-    @PreAuthorize ("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
     @GetMapping("/listeCitoyen")
-    public ResponseEntity<Object> ListeCitoyen(Authentication authentication) {
+    public ResponseEntity<Object> ListeCitoyen() {
 
         try {
             return ResponseMessage.generateResponse("La liste des citoyens :", HttpStatus.OK, userService.getAllCitoyen());

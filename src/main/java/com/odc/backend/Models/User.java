@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,8 +25,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Setter
-@Entity
 @ToString
+@Entity
 public class User {
     
     @Id
@@ -38,6 +40,11 @@ public class User {
     private String email;
     private String photo;
     private String password;
+
+    //
+    private Long point;
+    private Long niveau;
+
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles", 

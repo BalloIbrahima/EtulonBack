@@ -29,6 +29,12 @@ public interface UserService {
     //Liste des administrateurs
     List<User> getAllAdmin();
 
+    //Nombre d'administrateurs
+    Long NombreAdmin();
+
     //Liste des citoyens
     List<User> getAllCitoyen();
+
+    //Nombre de citoyen
+    Long NombreCitoyen();
 }

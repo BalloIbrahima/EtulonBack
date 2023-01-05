@@ -28,6 +28,9 @@ public class UserDetailsImpl implements UserDetails{
     private String username;
     private String email;
     private String photo;
+
+    private Long point;
+    private Long niveau;
     @JsonIgnore
     private String password;
 
@@ -46,6 +49,8 @@ public class UserDetailsImpl implements UserDetails{
             user.getUsername(), 
             user.getEmail(),
             user.getPhoto(),
+            user.getPoint(),
+            user.getNiveau(),
             user.getPassword(), 
             authorities);
     }

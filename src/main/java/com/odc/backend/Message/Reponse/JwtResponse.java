@@ -16,9 +16,11 @@ public class JwtResponse {
     private String photo;
     private String nom;
     private String prenom;
+    private Long point;
+    private Long niveau;
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username,String email, String nom,String prenom, String photo,List<String> roles) {
+    public JwtResponse(String accessToken, Long id, String username,String email, String nom,String prenom, String photo,Long point, Long niveau,List<String> roles) {
         this.token = accessToken;
         this.id = id;
         this.username = username;
@@ -27,5 +29,7 @@ public class JwtResponse {
         this.nom = nom;
         this.prenom = prenom;
         this.roles = roles;
+        this.point=point;
+        this.niveau=niveau;
       }
 }

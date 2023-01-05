@@ -1,12 +1,9 @@
 package com.odc.backend.Repository;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.odc.backend.Models.Role;
 import com.odc.backend.Models.User;
 public interface UserRepository extends JpaRepository<User, Long>{
     //For username
@@ -19,5 +16,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 
     ///par role
-    List<User> findByRoles(Set<Role> roles);
+    //List<User> findByRoles(Set<Role> roles);
 }
