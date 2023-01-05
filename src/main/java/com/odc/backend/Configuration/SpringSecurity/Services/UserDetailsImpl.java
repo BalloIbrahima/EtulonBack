@@ -31,6 +31,9 @@ public class UserDetailsImpl implements UserDetails{
     private String photo;
     private Long point;
     private Long niveau;
+    private String Pays;
+    private String ville;
+    private String adresse;
     @JsonIgnore
     private String password;
     private Date dateSouscription;
@@ -52,6 +55,9 @@ public class UserDetailsImpl implements UserDetails{
             user.getPhoto(),
             user.getPoint(),
             user.getNiveau(),
+            user.getPays(),
+            user.getVille(),
+            user.getAdresse(),
             user.getPassword(), 
             user.getDateSouscription(),
             authorities);

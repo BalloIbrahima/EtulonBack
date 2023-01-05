@@ -14,7 +14,10 @@ public class SignupRequest {
     private String email;
     private String photo;
     private Date dateSouscription;
-
+    private String Pays;
+    private String ville;
+    private String adresse;
+    
     //
     private Long point;
     private Long niveau;

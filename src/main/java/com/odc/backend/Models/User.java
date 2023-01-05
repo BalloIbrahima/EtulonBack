@@ -41,6 +41,11 @@ public class User {
     private String password;
     private Date dateSouscription;
 
+    //location
+    private String Pays;
+    private String ville;
+    private String adresse;
+
 
     //
     private Long point;

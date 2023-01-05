@@ -75,7 +75,7 @@ public class UserController {
             .collect(Collectors.toList());
 
         /////////////////
-        return ResponseMessage.generateResponse("ok", HttpStatus.OK, new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail(), userDetails.getNom(), userDetails.getPrenom(), userDetails.getPhoto(),userDetails.getPoint(),userDetails.getNiveau(),userDetails.getDateSouscription(), roles));
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail(), userDetails.getNom(), userDetails.getPrenom(), userDetails.getPhoto(),userDetails.getPoint(),userDetails.getNiveau(),userDetails.getDateSouscription(),userDetails.getPays(), userDetails.getVille(), userDetails.getAdresse(), roles));
     }
     // Fin
     
