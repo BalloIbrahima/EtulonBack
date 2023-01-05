@@ -1,12 +1,9 @@
 package com.odc.backend.Models;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,21 +17,12 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-public class Conseil {
+public class Problematique {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titre;
-    @Lob
-    private String contenu;
-    private Long nbreLike;
-
-    private Date date;
-
-    ///attribut specifique au type de conseil
-    private String lien;
-    private EConseil type;
-
-
+    private String libelle;
+    private String couleur;
 }
