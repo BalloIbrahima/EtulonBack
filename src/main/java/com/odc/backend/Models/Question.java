@@ -1,6 +1,8 @@
 package com.odc.backend.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,5 +31,8 @@ public class Question {
     private Long timer;
     private Long point;
 
+    @Enumerated(EnumType.STRING)
+    private EType type;
+    private String lien;
 
 }

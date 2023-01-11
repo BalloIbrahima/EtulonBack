@@ -1,6 +1,8 @@
 package com.odc.backend.Models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,4 +27,8 @@ public class Niveau {
 
     private String libelle;
     private String description;
+    
+    @Enumerated(EnumType.STRING)
+    private EType typeDescription;
+    private String lienDescription;
 }

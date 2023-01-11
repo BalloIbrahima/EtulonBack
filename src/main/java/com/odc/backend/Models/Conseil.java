@@ -3,6 +3,8 @@ package com.odc.backend.Models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,8 +35,11 @@ public class Conseil {
     private Date date;
 
     ///attribut specifique au type de conseil
+    
+    @Enumerated(EnumType.STRING)
+    private EType type;
+
     private String lien;
-    private EConseil type;
 
 
 }

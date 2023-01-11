@@ -1,6 +1,6 @@
 package com.odc.backend.Models;
 
-public enum EConseil {
+public enum EType {
     TEXT,
     AUDIO,
     PHOTO,
