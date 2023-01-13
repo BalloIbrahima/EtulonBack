@@ -8,8 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
-import org.aspectj.weaver.loadtime.Agent;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,15 +20,16 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-public class Commentaire {
+public class Like {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Lob
-    private String description;
+    private Long score;
 
-    /////
+    //
     @ManyToOne
     @JoinColumn(name = "id_conseil")
     private Conseil conseil;

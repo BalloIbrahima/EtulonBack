@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,4 +29,15 @@ public class Score {
 
     private Long score;
     private Date date;
+    private Long duree;
+    private Boolean isLiked;
+
+    ///
+    @ManyToOne
+    @JoinColumn(name = "id_niveau")
+    private Niveau niveau;
+
+    @ManyToOne
+    @JoinColumn(name = "id_user")
+    private User user;
 }

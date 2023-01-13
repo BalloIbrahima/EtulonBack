@@ -1,7 +1,9 @@
 package com.odc.backend.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,4 +64,30 @@ public class User {
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    //
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Commentaire> commentaires=new ArrayList<>();
+
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Conseil> conseils=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Like> likes=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Score> scores=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Problematique> problematiques=new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Jeu> jeux=new ArrayList<>();
 }
