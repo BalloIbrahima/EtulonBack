@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-public class Nofication {
+public class Notification {
     
     @Id
     @Column(name = "conseil_id")
