@@ -27,6 +27,7 @@ public class SpringSecurity {
     // @Autowired
     // private AuthEntryPointJwt unauthorizedHandler;
 
+    
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
@@ -66,6 +67,12 @@ public class SpringSecurity {
             .antMatchers("/user/login").permitAll()
             //.antMatchers("/user/listeCitoyen").permitAll()
             .antMatchers("/logout").permitAll()
+            .antMatchers("/v2/api-docs",
+            "/configuration/ui",
+            "/swagger-resources/**",
+            "/configuration/security",
+            "/swagger-ui.html",
+            "/webjars/**").permitAll()
             //.antMatchers("/swagger").permitAll()
             //.antMatchers("/swagger-ui.html").permitAll()
 
