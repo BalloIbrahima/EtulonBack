@@ -195,7 +195,7 @@ public class UserController {
 
         Updateuser.setPassword(newPassword);
         User userUpdated = userService.updateUser(Updateuser);
-        return ResponseMessage.generateResponse("Mots de oasse modifié avec succes", HttpStatus.OK, userUpdated);
+        return ResponseMessage.generateResponse("Mots de passe modifié avec succes", HttpStatus.OK, userUpdated);
 
     }
     // Fin
@@ -206,10 +206,10 @@ public class UserController {
     @DeleteMapping("/get/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
         try {
-            return ResponseMessage.generateResponse("Utilisarteur trouve !", HttpStatus.OK, userService.getUser(id));
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getUser(id));
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors de la recuperation.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors de la recuperation.");
         }
     }
     // Fin
@@ -223,10 +223,10 @@ public class UserController {
         try {
             User user=userRepository.findById(idUser).get();
             userService.deleteUser(user);
-            return ResponseMessage.generateResponse("Utilisarteur suprimer!", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, "Utilisarteur suprimer!");
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors de la surpression.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors de la surpression.");
         }
 
     }
@@ -239,10 +239,10 @@ public class UserController {
     public ResponseEntity<Object> Liste(Authentication authentication) {
 
         try {
-            return ResponseMessage.generateResponse("La liste des citoyens :", HttpStatus.OK, userService.getAllUser());
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getAllUser());
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors du retour de la liste.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour de la liste.");
         }
 
     }
@@ -255,10 +255,10 @@ public class UserController {
     public ResponseEntity<Object> ListeAdmin(Authentication authentication) {
 
         try {
-            return ResponseMessage.generateResponse("La liste des admins:", HttpStatus.OK, userService.getAllAdmin());
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getAllAdmin());
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors du retour de la liste.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour de la liste.");
         }
 
     }
@@ -271,10 +271,10 @@ public class UserController {
     public ResponseEntity<Object> NombreAdmin(Authentication authentication) {
 
         try {
-            return ResponseMessage.generateResponse("Le nombre d'admins:", HttpStatus.OK, userService.NombreAdmin());
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.NombreAdmin());
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors du retour du nombre d'admins.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour du nombre d'admins.");
         }
 
     }
@@ -287,10 +287,10 @@ public class UserController {
     public ResponseEntity<Object> NombreCitoyen(Authentication authentication) {
 
         try {
-            return ResponseMessage.generateResponse("Le nombre de citoyen:", HttpStatus.OK, userService.NombreCitoyen());
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.NombreCitoyen());
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors du retour du nombre de citoyen.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour du nombre de citoyen.");
         }
 
     }
@@ -304,10 +304,10 @@ public class UserController {
     public ResponseEntity<Object> ListeCitoyen() {
 
         try {
-            return ResponseMessage.generateResponse("La liste des citoyens :", HttpStatus.OK, userService.getAllCitoyen());
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getAllCitoyen());
 
         } catch (Exception e) {
-            return ResponseMessage.generateResponse("Erreur lors du retour de la liste.", HttpStatus.OK, null);
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour de la liste.");
         }
 
     }
