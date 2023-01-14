@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -41,6 +42,7 @@ public class Problematique {
     @OneToMany(mappedBy = "problematique")
     List<Conseil> conseils=new ArrayList<>();
 
+    //le createur de la problematique
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
@@ -48,4 +50,10 @@ public class Problematique {
     @JsonIgnore
     @OneToMany(mappedBy = "problematique")
     List<Jeu> jeux=new ArrayList<>();
+
+    //
+    //les gamers qui sont interesses par cette problematique
+    @JsonIgnore
+    @ManyToMany(mappedBy ="interets" )
+    List<User> users=new ArrayList<>();
 }

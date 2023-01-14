@@ -3,6 +3,7 @@ package com.odc.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.odc.backend.Models.ERole;
@@ -11,7 +12,7 @@ import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Service.UserService;
 
-@SpringBootApplication
+@SpringBootApplication @EnableScheduling
 public class BackendApplication {
 
 	public static void main(String[] args) {

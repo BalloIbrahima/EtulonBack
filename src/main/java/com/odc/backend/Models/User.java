@@ -65,6 +65,12 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    //les problematiques qui interressent le gamer
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(  name = "centre_interets", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "problematique_id"))
+    private Set<Problematique> interets = new HashSet<>();
     //
     @JsonIgnore
     @OneToMany(mappedBy = "user")
@@ -77,7 +83,7 @@ public class User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")
-    List<Like> likes=new ArrayList<>();
+    List<Jaime> likes=new ArrayList<>();
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")

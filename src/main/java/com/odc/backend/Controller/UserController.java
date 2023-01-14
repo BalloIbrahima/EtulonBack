@@ -1,7 +1,14 @@
 package com.odc.backend.Controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +33,12 @@ import com.odc.backend.Configuration.SpringSecurity.Services.UserDetailsImpl;
 import com.odc.backend.Message.Reponse.JwtResponse;
 import com.odc.backend.Message.Reponse.ResponseMessage;
 import com.odc.backend.Message.Requette.LoginRequest;
+import com.odc.backend.Message.Requette.SignupRequest ;
+import com.odc.backend.Models.ERole;
+import com.odc.backend.Models.Role;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
+import com.odc.backend.Repository.UserRepository;
 import com.odc.backend.Service.UserService;
 
 import io.swagger.annotations.Api;
@@ -38,7 +49,7 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    //private static final Logger log = LoggerFactory.getLogger(UserController.class);
+    private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -54,8 +65,88 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    ////pour la creation dun user
+    @Autowired
+    UserRepository userRepository;
 
+    ////pour la creation dun user
+    @ApiOperation(value = "Pour la creation d'un user.")
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody SignupRequest signUpRequest) {
+        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+            return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Cet nom d'utilisateur existe déjà!");
+        }
+    
+        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+            return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Cet email existe déjà!");
+        }
+
+        if (userRepository.existsByTelephone(signUpRequest.getTelephone())) {
+            return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Cet numero de telephone existe déjà!");
+        }
+    
+        Date maDate = new Date();
+
+        // Create new user's account
+        User user = new User(null,signUpRequest.getNom(),signUpRequest.getPrenom(),signUpRequest.getUsername(),
+          signUpRequest.getEmail(),signUpRequest.getTelephone(),signUpRequest.getPhoto(),
+          encoder.encode(signUpRequest.getPassword()),maDate,signUpRequest.getPays(),signUpRequest.getPays(),signUpRequest.getAdresse(),
+          signUpRequest.getPoint(),signUpRequest.getNiveau(),null,
+          signUpRequest.getInterets(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),
+          signUpRequest.getProblematiques(),new ArrayList<>());
+      
+        log.info("Utilisateur crée" + user);
+        Set<String> strRoles = signUpRequest.getRole();
+        Set<Role> roles = new HashSet<>();
+    
+        if (strRoles == null) {
+            Role citoyenRole = roleRepository.findByName(ERole.ROLE_CITOYEN);
+            if(citoyenRole ==null){
+                log.info("role non trouvé" + citoyenRole);
+                return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Role nom trouver.");
+            }else{
+                roles.add(citoyenRole);
+            }            
+        } else {
+            strRoles.forEach(role -> {
+                switch (role) {
+                    case "superadmin":
+                        Role superadminRole = roleRepository.findByName(ERole.ROLE_SUPERADMIN);
+                        if(superadminRole ==null){
+                            //return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Role nom trouver.");
+                        }else{
+                            roles.add(superadminRole);
+                        }
+                        break;
+                    case "admin":
+                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN);
+                        if(adminRole ==null){
+                            //return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Role nom trouver.");
+                        }else{
+                            roles.add(adminRole);
+                        }
+                        break;
+                    // case "citoyen":
+                    // Role adminRole = roleRepository.findByName(ERole.ROLE_CITOYEN)
+                    //     .orElseThrow(() -> new RuntimeException("Erreur: Role nom trouver."));
+                    // roles.add(adminRole);
+                    // break;
+                    default:
+                        Role userRole = roleRepository.findByName(ERole.ROLE_CITOYEN);
+                        if(userRole ==null){
+                            //return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Role nom trouver.");
+                        }else{
+                            roles.add(userRole);
+                        }
+                }
+            });
+        }
+
+        user.setRoles(roles);
+        userRepository.save(user);
+        log.info("Utilisateur crée " + user.getUsername());
+    
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK,  userRepository.save(user));        
+    }
     /////fin creation user
 
     // methode pour le login d'un Admin

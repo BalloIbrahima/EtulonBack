@@ -59,7 +59,7 @@ public class Conseil {
     @JsonIgnore
     @OneToOne(mappedBy = "conseil", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
-    private Nofication notification;
+    private Notification notification;
 
     @ManyToOne
     @JoinColumn(name = "id_problematique")
@@ -67,7 +67,7 @@ public class Conseil {
 
     @JsonIgnore
     @OneToMany(mappedBy = "conseil")
-    List<Like> likes=new ArrayList<>();
+    List<Jaime> likes=new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "id_user")

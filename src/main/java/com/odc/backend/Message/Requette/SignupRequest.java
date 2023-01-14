@@ -1,7 +1,10 @@
 package com.odc.backend.Message.Requette;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
+
+import com.odc.backend.Models.Problematique;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +27,10 @@ public class SignupRequest {
     private Long point;
     private Long niveau;
     private String password;
+
+    List<Problematique> problematiques;
+
+    private Set<Problematique> interets ;
 
     private Set<String> role;
 

@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @ToString
-public class Like {
+public class Jaime {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

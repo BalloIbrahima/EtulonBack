@@ -66,13 +66,13 @@ public class SpringSecurity {
             .antMatchers("/user/login").permitAll()
             //.antMatchers("/user/listeCitoyen").permitAll()
             .antMatchers("/logout").permitAll()
-            .antMatchers("/swagger").permitAll()
-            .antMatchers("/swagger-ui.html").permitAll()
+            //.antMatchers("/swagger").permitAll()
+            //.antMatchers("/swagger-ui.html").permitAll()
 
             
             .anyRequest().authenticated();
 
-        //http.formLogin();
+        http.formLogin();
         // http.oauth2Login();
         http.authenticationProvider(authenticationProvider());
 
