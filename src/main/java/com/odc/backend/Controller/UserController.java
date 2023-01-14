@@ -172,13 +172,30 @@ public class UserController {
     
 
     // methode pour la mise à jour d'un user
-    @PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
     @ApiOperation(value = "Mis à jour d'un user.")
     @PutMapping("/update")
     public ResponseEntity<Object> MiseAJour(@RequestBody User user) {
 
         User userUpdated = userService.updateUser(user);
         return ResponseMessage.generateResponse("tilisateur modifié avec succes", HttpStatus.OK, userUpdated);
+
+    }
+    // Fin
+
+    // methode pour la mise à jour du mots de passe d'un user
+    //@PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
+    @ApiOperation(value = "Mis à jour du mots de passe d'un user.")
+    @PutMapping("/updatePassword")
+    public ResponseEntity<Object> MiseAJourPassword(@RequestBody User user) {
+
+        String newPassword=encoder.encode(user.getPassword());
+
+        User Updateuser=userRepository.findById(user.getId()).get();
+
+        Updateuser.setPassword(newPassword);
+        User userUpdated = userService.updateUser(Updateuser);
+        return ResponseMessage.generateResponse("Mots de oasse modifié avec succes", HttpStatus.OK, userUpdated);
 
     }
     // Fin
@@ -198,12 +215,13 @@ public class UserController {
     // Fin
 
     // methode pour la surpression d'un user
-    @PreAuthorize ("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Surpression d'un user.")
-    @DeleteMapping("/delete")
-    public ResponseEntity<Object> SuprimerUser(@RequestBody User user) {
+    @DeleteMapping("/delete/{idUser}")
+    public ResponseEntity<Object> SuprimerUser(@PathVariable Long idUser) {
 
         try {
+            User user=userRepository.findById(idUser).get();
             userService.deleteUser(user);
             return ResponseMessage.generateResponse("Utilisarteur suprimer!", HttpStatus.OK, null);
 
@@ -216,7 +234,7 @@ public class UserController {
 
     // methode pour la liste des users
     @ApiOperation(value = "Récuperation de la liste des users.")
-    @PreAuthorize ("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @GetMapping("/liste")
     public ResponseEntity<Object> Liste(Authentication authentication) {
 
@@ -232,7 +250,7 @@ public class UserController {
 
     // methode pour la liste des Admins
     @ApiOperation(value = "Récuperation de la liste des administrateurs.")
-    @PreAuthorize ("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @GetMapping("/listeAdmin")
     public ResponseEntity<Object> ListeAdmin(Authentication authentication) {
 

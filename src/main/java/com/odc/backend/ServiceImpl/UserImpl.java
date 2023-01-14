@@ -1,5 +1,6 @@
 package com.odc.backend.ServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,8 +68,13 @@ public class UserImpl implements UserService {
         // TODO Auto-generated method stub
         //Set<Role> rechList=new HashSet<>(); 
         Role admin=roleRepository.findByName(ERole.ROLE_ADMIN);
+     Role superadmin=roleRepository.findByName(ERole.ROLE_SUPERADMIN);
+
+            List<User>  list=new ArrayList<>();
+            list.addAll(admin.getUsers());
+            list.addAll(superadmin.getUsers());
         //rechList.add(admin);
-        return admin.getUsers();
+        return list;
     }
 
     @Override
