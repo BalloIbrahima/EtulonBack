@@ -69,4 +69,13 @@ public class NiveauController {
     public ResponseEntity<?> getAllNiveau() {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, niveauService.getAllNiveau());
     }
+
+    ////pour la recuperation de toutes les question d'un niveau
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
+    @ApiOperation(value = "pour la recuperation de toutes les question d'un niveau.")
+    @GetMapping("/getQuestionNiveau/{idNiveau}")
+    public ResponseEntity<?> getAllQuestionForNiveau(@PathVariable Long idNiveau) {
+        Niveau niveau=niveauService.getNiveau(idNiveau);
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, niveau.getQuestions());
+    }
 }
