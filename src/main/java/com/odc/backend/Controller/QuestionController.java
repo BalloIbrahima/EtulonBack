@@ -100,4 +100,19 @@ public class QuestionController {
         Question question=questionService.getQuestion(id);
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, question.getReponses());
     }
+
+
+    ////pour la recuperation de la bonne reponse d'une question
+    @ApiOperation(value = "Pour la recuperation de la bonne reponse d'une question.")
+    @GetMapping("/getgodreponse/{id}")
+    public ResponseEntity<?> getGodReponse(@PathVariable Long id) {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, questionService.getBonneReponse(id));
+    }
+
+    ////pour la recuperation des mauvaises reponses d'une question
+    @ApiOperation(value = "Pour la recuperation des mauvaises reponses d'une question.")
+    @GetMapping("/getbadreponse/{id}")
+    public ResponseEntity<?> getBadReponse(@PathVariable Long id) {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, questionService.getMauvaisesReponses(id));
+    }
 }
