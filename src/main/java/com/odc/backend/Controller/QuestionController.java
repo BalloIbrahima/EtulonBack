@@ -92,4 +92,12 @@ public class QuestionController {
     public ResponseEntity<?> getAllNiveau() {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, questionService.getAllQuestion());
     }
+
+    ////pour la recuperation d'une question
+    @ApiOperation(value = "Pour la recuperation des reponses d'une question.")
+    @GetMapping("/getReponses/{id}")
+    public ResponseEntity<?> getReponsesQuestion(@PathVariable Long id) {
+        Question question=questionService.getQuestion(id);
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, question.getReponses());
+    }
 }
