@@ -15,6 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -49,6 +51,7 @@ public class Question {
         inverseJoinColumns = @JoinColumn(name = "reponse_id"))
     private List<Reponse> reponses = new ArrayList<>();
 
+    @JsonIgnore
     @ManyToMany(mappedBy = "questions")
     List<Niveau> niveau=new ArrayList<>();
 

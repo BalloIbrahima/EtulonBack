@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +33,7 @@ public class Reponse {
     private Boolean isOk;
 
     ////
+    @JsonIgnore
     @ManyToMany(mappedBy = "reponses")
     List<Question> questions=new ArrayList<>();
 }
