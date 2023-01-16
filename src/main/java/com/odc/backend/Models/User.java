@@ -60,18 +60,19 @@ public class User {
     private Long niveau;
 
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinTable(  name = "user_roles", 
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
     //les problematiques qui interressent le gamer
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(  name = "centre_interets", 
+    //mes preferences
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @JoinTable(  name = "preferences", 
         joinColumns = @JoinColumn(name = "user_id"), 
         inverseJoinColumns = @JoinColumn(name = "problematique_id"))
-    private Set<Problematique> interets = new HashSet<>();
+    List<Problematique> preferences = new ArrayList<>();
     //
     @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
@@ -97,4 +98,6 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
     List<Jeu> jeux=new ArrayList<>();
+
+    
 }

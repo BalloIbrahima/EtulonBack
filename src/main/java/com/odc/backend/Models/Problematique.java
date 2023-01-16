@@ -50,18 +50,15 @@ public class Problematique {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    @JoinTable(  name = "centre_interets", 
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @JoinTable(  name = "jeu_problematique", 
         joinColumns = @JoinColumn(name = "problematique_id"), 
         inverseJoinColumns = @JoinColumn(name = "jeu_id"))
-        List<Jeu> jeux = new ArrayList<>();
-    // @JsonIgnore
-    // @OneToMany(mappedBy = "problematique",cascade = CascadeType.REMOVE)
-    // List<Jeu> jeux=new ArrayList<>();
+    List<Jeu> jeux = new ArrayList<>();
 
     //
     //les gamers qui sont interesses par cette problematique
-    @JsonIgnore
-    @ManyToMany(mappedBy ="interets",cascade = CascadeType.REMOVE)
-    List<User> users=new ArrayList<>();
+    @JsonIgnore 
+    @ManyToMany(mappedBy ="preferences")
+    List<User> citoyensIntereses=new ArrayList<>();
 }

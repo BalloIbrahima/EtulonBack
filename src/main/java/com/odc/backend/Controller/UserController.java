@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -91,7 +90,7 @@ public class UserController {
           signUpRequest.getEmail(),signUpRequest.getTelephone(),signUpRequest.getPhoto(),
           encoder.encode(signUpRequest.getPassword()),maDate,signUpRequest.getPays(),signUpRequest.getPays(),signUpRequest.getAdresse(),
           signUpRequest.getPoint(),signUpRequest.getNiveau(),null,
-          signUpRequest.getInterets(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),
+          signUpRequest.getPreferences(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),new ArrayList<>(),
           signUpRequest.getProblematiques(),new ArrayList<>());
       
         log.info("Utilisateur crée" + user);
@@ -201,9 +200,9 @@ public class UserController {
     // Fin
 
     // methode pour la recuperation d'un user a travers son id
-    @PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
+    //@PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
     @ApiOperation(value = "recuperation d'un user a travers son id.")
-    @DeleteMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
         try {
             return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getUser(id));
@@ -305,6 +304,38 @@ public class UserController {
 
         try {
             return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getAllCitoyen());
+
+        } catch (Exception e) {
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour de la liste.");
+        }
+
+    }
+    // Fin
+
+    // methode pour les preferences d'un user
+    @ApiOperation(value = "Récuperation des jeux qui font parties des preferences d'un user.")
+    //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
+    @GetMapping("/preferences/{iduser}")
+    public ResponseEntity<Object> MesPreferences(@PathVariable Long idUser) {
+
+        try {
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.MesJeuxPreferes(idUser));
+
+        } catch (Exception e) {
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour de la liste.");
+        }
+
+    }
+    // Fin
+
+    // methode pour jeux d'un user
+    @ApiOperation(value = "Récuperation des derniers jeux d'un user.")
+    //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
+    @GetMapping("/mesderniersjeux/{iduser}/{nombre}")
+    public ResponseEntity<Object> MesDerniersJeux(@PathVariable Long idUser,@PathVariable Long nombre) {
+
+        try {
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.MesDerniersjeux(idUser,nombre));
 
         } catch (Exception e) {
             return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors du retour de la liste.");

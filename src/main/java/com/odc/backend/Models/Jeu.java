@@ -59,9 +59,6 @@ public class Jeu {
     @JsonIgnore
     @ManyToMany(mappedBy ="jeux")
     List<Problematique> problematiques=new ArrayList<>();
-    // @ManyToOne
-    // @JoinColumn(name = "id_problematique")
-    // private Problematique problematique;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
@@ -71,4 +68,5 @@ public class Jeu {
     @OneToMany(mappedBy = "jeu",cascade = CascadeType.REMOVE)
     List<Niveau> niveaux=new ArrayList<>();
 
+    
 }

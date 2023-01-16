@@ -46,7 +46,7 @@ public class Question {
     private String lien;
 
     ////
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinTable(  name = "question_reponse", 
         joinColumns = @JoinColumn(name = "question_id"), 
         inverseJoinColumns = @JoinColumn(name = "reponse_id"))

@@ -53,7 +53,7 @@ public class Niveau {
     @OneToMany(mappedBy = "niveau",cascade = CascadeType.REMOVE)
     List<Score> scores=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinTable(  name = "niveau_question", 
         joinColumns = @JoinColumn(name = "niveau_id"), 
         inverseJoinColumns = @JoinColumn(name = "question_id"))

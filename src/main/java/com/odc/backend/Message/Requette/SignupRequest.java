@@ -30,7 +30,7 @@ public class SignupRequest {
 
     List<Problematique> problematiques;
 
-    private Set<Problematique> interets ;
+    private List<Problematique> preferences ;
 
     private Set<String> role;
 

@@ -2,6 +2,7 @@ package com.odc.backend.Service;
 
 import java.util.List;
 
+import com.odc.backend.Models.Jeu;
 import com.odc.backend.Models.User;
 
 public interface UserService {
@@ -37,4 +38,8 @@ public interface UserService {
 
     //Nombre de citoyen
     Long NombreCitoyen();
+
+    List<Jeu> MesJeuxPreferes(Long idUser);
+
+    List<Jeu> MesDerniersjeux(Long idUser, Long nombre);
 }

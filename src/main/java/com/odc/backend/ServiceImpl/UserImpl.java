@@ -7,7 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.odc.backend.Models.ERole;
+import com.odc.backend.Models.Jeu;
+import com.odc.backend.Models.Niveau;
+import com.odc.backend.Models.Problematique;
 import com.odc.backend.Models.Role;
+import com.odc.backend.Models.Score;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Repository.UserRepository;
@@ -100,6 +104,44 @@ public class UserImpl implements UserService {
         // TODO Auto-generated method stub
         Role citoyen=roleRepository.findByName(ERole.ROLE_CITOYEN);
         return (long) citoyen.getUsers().size(); 
+    }
+
+    @Override
+    public List<Jeu> MesJeuxPreferes(Long idUser) {
+        // TODO Auto-generated method stub
+
+        User user=userRepository.findById(idUser).get();
+        List<Problematique> mesPreferences=user.getPreferences();
+
+        List<Jeu> mesJeux=new ArrayList<>();
+
+        for (Problematique p : mesPreferences) {
+            mesJeux.addAll(p.getJeux());
+        }
+
+        return mesJeux;
+    }
+
+    @Override
+    public List<Jeu> MesDerniersjeux(Long idUser, Long nombre) {
+        // TODO Auto-generated method stub
+        User user=userRepository.findById(idUser).get();
+
+        List<Niveau> mesNiveaux=new ArrayList<>();
+        for (Score score : user.getScores()) {
+            mesNiveaux.add(score.getNiveau());
+        }
+
+        List<Jeu> myLastJeux=new ArrayList<>();
+
+        for (Niveau niveau : mesNiveaux) {
+            if(!myLastJeux.contains(niveau.getJeu())){
+                myLastJeux.add(niveau.getJeu());
+            }
+            
+        }
+
+        return myLastJeux;
     }
 
     
