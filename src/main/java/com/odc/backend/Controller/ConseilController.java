@@ -85,4 +85,7 @@ public class ConseilController {
         Problematique problematique=problematiqueService.getProblematique(id);
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, problematique.getConseils());
     }
+
+    
+    
 }
