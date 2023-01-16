@@ -53,11 +53,11 @@ public class Conseil {
 
     ////
     @JsonIgnore
-    @OneToMany(mappedBy = "conseil")
+    @OneToMany(mappedBy = "conseil",cascade = CascadeType.REMOVE)
     List<Commentaire> commentaires=new ArrayList<>();
 
     @JsonIgnore
-    @OneToOne(mappedBy = "conseil", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "conseil", cascade = CascadeType.REMOVE)
     @PrimaryKeyJoinColumn
     private Notification notification;
 
@@ -66,7 +66,7 @@ public class Conseil {
     private Problematique problematique;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "conseil")
+    @OneToMany(mappedBy = "conseil",cascade = CascadeType.REMOVE)
     List<Jaime> likes=new ArrayList<>();
 
     @ManyToOne

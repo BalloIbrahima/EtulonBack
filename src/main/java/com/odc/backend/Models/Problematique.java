@@ -3,6 +3,7 @@ package com.odc.backend.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,7 +40,7 @@ public class Problematique {
 
     //////
     @JsonIgnore
-    @OneToMany(mappedBy = "problematique")
+    @OneToMany(mappedBy = "problematique",cascade = CascadeType.REMOVE)
     List<Conseil> conseils=new ArrayList<>();
 
     //le createur de la problematique
@@ -48,12 +49,12 @@ public class Problematique {
     private User user;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "problematique")
+    @OneToMany(mappedBy = "problematique",cascade = CascadeType.REMOVE)
     List<Jeu> jeux=new ArrayList<>();
 
     //
     //les gamers qui sont interesses par cette problematique
     @JsonIgnore
-    @ManyToMany(mappedBy ="interets" )
+    @ManyToMany(mappedBy ="interets",cascade = CascadeType.REMOVE)
     List<User> users=new ArrayList<>();
 }

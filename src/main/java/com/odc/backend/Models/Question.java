@@ -3,6 +3,7 @@ package com.odc.backend.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -45,14 +46,14 @@ public class Question {
     private String lien;
 
     ////
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(  name = "question_reponse", 
         joinColumns = @JoinColumn(name = "question_id"), 
         inverseJoinColumns = @JoinColumn(name = "reponse_id"))
     private List<Reponse> reponses = new ArrayList<>();
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "questions")
+    @ManyToMany(mappedBy = "questions",cascade = CascadeType.REMOVE)
     List<Niveau> niveau=new ArrayList<>();
 
 }

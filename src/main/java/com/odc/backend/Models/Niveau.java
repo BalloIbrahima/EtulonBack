@@ -3,6 +3,7 @@ package com.odc.backend.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -49,10 +50,10 @@ public class Niveau {
     private Jeu jeu;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "niveau")
+    @OneToMany(mappedBy = "niveau",cascade = CascadeType.REMOVE)
     List<Score> scores=new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(  name = "niveau_question", 
         joinColumns = @JoinColumn(name = "niveau_id"), 
         inverseJoinColumns = @JoinColumn(name = "question_id"))

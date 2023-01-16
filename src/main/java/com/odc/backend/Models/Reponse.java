@@ -3,7 +3,10 @@ package com.odc.backend.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +35,12 @@ public class Reponse {
     private String contenu;
     private Boolean isOk;
 
+    @Enumerated(EnumType.STRING)
+    private EType type;
+    private String lien;
+
     ////
     @JsonIgnore
-    @ManyToMany(mappedBy = "reponses")
+    @ManyToMany(mappedBy = "reponses",cascade = CascadeType.REMOVE)
     List<Question> questions=new ArrayList<>();
 }
