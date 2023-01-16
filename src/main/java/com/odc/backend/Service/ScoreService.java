@@ -20,4 +20,8 @@ public interface ScoreService {
     // Methode pour la liste des Scores à partir d'un Score
     List<Score> getAllScore();
 
+    Long getUserScore(Long iduser);
+
+    Long getTotalDurres(Long iduser);
+
 }
