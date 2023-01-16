@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -48,9 +50,14 @@ public class Problematique {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "problematique",cascade = CascadeType.REMOVE)
-    List<Jeu> jeux=new ArrayList<>();
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(  name = "centre_interets", 
+        joinColumns = @JoinColumn(name = "problematique_id"), 
+        inverseJoinColumns = @JoinColumn(name = "jeu_id"))
+        List<Jeu> jeux = new ArrayList<>();
+    // @JsonIgnore
+    // @OneToMany(mappedBy = "problematique",cascade = CascadeType.REMOVE)
+    // List<Jeu> jeux=new ArrayList<>();
 
     //
     //les gamers qui sont interesses par cette problematique

@@ -78,8 +78,6 @@ public class ScoreImpl implements ScoreService {
         for (Score s : mScores) {
             durres+=s.getDuree();
         }
-
-        
         return durres;
     }
 }

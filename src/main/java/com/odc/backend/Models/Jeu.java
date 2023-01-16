@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -55,9 +56,12 @@ public class Jeu {
     private Long nbreLike;
 
     ////
-    @ManyToOne
-    @JoinColumn(name = "id_problematique")
-    private Problematique problematique;
+    @JsonIgnore
+    @ManyToMany(mappedBy ="jeux")
+    List<Problematique> problematiques=new ArrayList<>();
+    // @ManyToOne
+    // @JoinColumn(name = "id_problematique")
+    // private Problematique problematique;
 
     @ManyToOne
     @JoinColumn(name = "id_user")
