@@ -48,7 +48,8 @@ public class Conseil {
     
     @Enumerated(EnumType.STRING)
     private EType type;
-
+    
+    @Lob
     private String lien;
 
     ////

@@ -51,6 +51,7 @@ public class Jeu {
     
     @Enumerated(EnumType.STRING)
     private EType typeDescription;
+    @Lob
     private String lienDescription;
 
     private Long nbreLike;
@@ -68,5 +69,5 @@ public class Jeu {
     @OneToMany(mappedBy = "jeu",cascade = CascadeType.REMOVE)
     List<Niveau> niveaux=new ArrayList<>();
 
-    
+
 }

@@ -37,6 +37,7 @@ public class Reponse {
 
     @Enumerated(EnumType.STRING)
     private EType type;
+    @Lob
     private String lien;
 
     ////

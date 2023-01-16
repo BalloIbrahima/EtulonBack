@@ -43,6 +43,7 @@ public class Question {
 
     @Enumerated(EnumType.STRING)
     private EType type;
+    @Lob
     private String lien;
 
     ////
