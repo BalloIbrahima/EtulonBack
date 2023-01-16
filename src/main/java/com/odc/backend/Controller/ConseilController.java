@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.odc.backend.Message.Reponse.ResponseMessage;
 import com.odc.backend.Models.Conseil;
+import com.odc.backend.Models.Problematique;
 import com.odc.backend.Service.ConseilService;
+import com.odc.backend.Service.ProblematiqueService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +30,9 @@ public class ConseilController {
     
     @Autowired
     ConseilService conseilService;
+
+    @Autowired
+    ProblematiqueService problematiqueService;
 
     // methode pour la création d'un conseil
     @ApiOperation(value = "Création d'un conseil.")
@@ -73,4 +78,11 @@ public class ConseilController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getAllConseil());
     }
 
+    ////pour la recuperation des conseils en fonction d'une problematique
+    @ApiOperation(value = "Pour la recuperation des conseils en fonction d'une problematique.")
+    @GetMapping("/getproblematiques/{id}")
+    public ResponseEntity<?> getProblematiques(@PathVariable Long id) {
+        Problematique problematique=problematiqueService.getProblematique(id);
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, problematique.getConseils());
+    }
 }
