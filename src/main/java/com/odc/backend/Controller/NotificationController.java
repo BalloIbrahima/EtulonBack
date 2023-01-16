@@ -39,7 +39,6 @@ public class NotificationController {
     @ApiOperation(value = "Pour la creation d'une notifictaion.")
     @PostMapping("/add")
     public ResponseEntity<?> registerNotification(@RequestBody Notification notification) {
-
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, notificationService.saveNotification(notification));
     }
 
