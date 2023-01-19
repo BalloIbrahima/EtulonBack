@@ -83,6 +83,14 @@ public class ConseilImpl implements ConseilService {
         List<Conseil> allConseil=conseilRepository.findAll();
 
 
+        // Collections.sort(allConseil, new Comparator<Conseil>() {
+
+        //     @Override
+        //     public int compare(Conseil arg0, Conseil arg1) {
+        //         // TODO Auto-generated method stub
+        //         arg0.getLikes().size().compareTo(arg1.getLikes().size());
+        //     }
+        // });
         
         return null;
     }
