@@ -73,6 +73,8 @@ public class SpringSecurity {
             "/configuration/security",
             "/swagger-ui.html",
             "/webjars/**").permitAll()
+            .antMatchers("/problematique/**").permitAll()
+
             //.antMatchers("/swagger").permitAll()
             //.antMatchers("/swagger-ui.html").permitAll()
 

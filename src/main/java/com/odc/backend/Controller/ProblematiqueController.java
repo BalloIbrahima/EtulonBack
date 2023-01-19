@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +19,7 @@ import com.odc.backend.Service.ProblematiqueService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:8200","http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @Api(value = "problematique", description = "Les actions reslisables sur lobjet problematique.")
 @RestController
 @RequestMapping("/problematique")
@@ -43,14 +45,14 @@ public class ProblematiqueController {
 
     ////pour la recuperation d'une problematique
     @ApiOperation(value = "Pour la recuperation d'une problematique.")
-    @PostMapping("/get/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<?> getProblematique(@PathVariable Long id) {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, problematiqueService.getProblematique(id));
     }
 
     ////pour la suppression d'une problematique
     @ApiOperation(value = "Pour la suppression d'une problematique.")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteProblematique(@PathVariable Long id) {
 
         Problematique problematique=problematiqueService.getProblematique(id);
@@ -62,7 +64,7 @@ public class ProblematiqueController {
     ////pour la recuperation de toutes les problematiques
     //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Pour la recuperation de toutes les problematiques.")
-    @PostMapping("/getall")
+    @GetMapping("/getall")
     public ResponseEntity<?> getAllProblematique() {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, problematiqueService.getAllProblematique());
     }

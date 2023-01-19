@@ -21,4 +21,10 @@ public interface ConseilService {
     // Methode pour la liste des conseils à partir d'un conseil
     List<Conseil> getAllConseil();
 
+    //recuperation des conseils en fonction des centres d'interets
+    List<Conseil> getByUserInterets(Long id);
+
+    //recuperation des conseils en fonction des plus aimes
+    List<Conseil> getByAimes(Long id);
+
 }

@@ -86,6 +86,11 @@ public class ConseilController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, problematique.getConseils());
     }
 
-    
+    ////pour la recuperation des conseils en fonction des interest d'un user
+    @ApiOperation(value = "Pour la recuperation des conseils en fonction des interest d'un user.")
+    @GetMapping("/getbyinterets/{id}")
+    public ResponseEntity<?> getByInterets(@PathVariable Long id) {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUserInterets(id));
+    }
     
 }
