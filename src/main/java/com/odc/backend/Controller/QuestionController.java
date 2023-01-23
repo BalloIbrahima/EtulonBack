@@ -21,7 +21,7 @@ import com.odc.backend.Service.QuestionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:8200","http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @Api(value = "question", description = "Les actions reslisables sur lobjet question.")
 @RestController
 @RequestMapping("/question")

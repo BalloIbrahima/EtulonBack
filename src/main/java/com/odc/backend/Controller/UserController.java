@@ -43,7 +43,7 @@ import com.odc.backend.Service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:8200","http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @Api(value = "user", description = "Les actions reslisables par les users du systeme.")
 @RestController
 @RequestMapping("/user")

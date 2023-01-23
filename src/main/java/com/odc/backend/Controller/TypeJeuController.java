@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.odc.backend.Service.TypeJeuService;
 
 import io.swagger.annotations.Api;
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials="true")
+@CrossOrigin(origins = {"http://localhost:4200","http://localhost:8200","http://localhost:8100"}, maxAge = 3600, allowCredentials="true")
 @Api(value = "typejeu", description = "Les actions reslisables sur lobjet type Jeu.")
 @RestController
 @RequestMapping("/typejeu")
