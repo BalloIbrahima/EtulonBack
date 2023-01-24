@@ -65,6 +65,10 @@ public class SpringSecurity {
             // .antMatchers("/region/get/**").permitAll()
             // .antMatchers("/pays/get/**").permitAll()
             .antMatchers("/user/login").permitAll()
+            .antMatchers("/user/signup").permitAll()
+            .antMatchers("/user/getuser/**").permitAll()
+
+            
             //.antMatchers("/user/listeCitoyen").permitAll()
             .antMatchers("/logout").permitAll()
             .antMatchers("/v2/api-docs",

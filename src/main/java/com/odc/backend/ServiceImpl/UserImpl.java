@@ -144,5 +144,11 @@ public class UserImpl implements UserService {
         return myLastJeux;
     }
 
+    @Override
+    public User getByTelephone(String telephone) {
+        // TODO Auto-generated method stub
+        return userRepository.findByTelephone(telephone);
+    }
+
     
 }

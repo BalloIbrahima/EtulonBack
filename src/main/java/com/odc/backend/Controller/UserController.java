@@ -28,12 +28,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.odc.backend.Configuration.SpringSecurity.Jwt.JwtUtils;
+import com.odc.backend.Configuration.SpringSecurity.Services.RefreshTokenService;
 import com.odc.backend.Configuration.SpringSecurity.Services.UserDetailsImpl;
+import com.odc.backend.Message.Exeption.TokenRefreshException;
 import com.odc.backend.Message.Reponse.JwtResponse;
 import com.odc.backend.Message.Reponse.ResponseMessage;
+import com.odc.backend.Message.Reponse.TokenRefreshResponse;
 import com.odc.backend.Message.Requette.LoginRequest;
 import com.odc.backend.Message.Requette.SignupRequest ;
+import com.odc.backend.Message.Requette.TokenRefreshRequest;
 import com.odc.backend.Models.ERole;
+import com.odc.backend.Models.RefreshToken;
 import com.odc.backend.Models.Role;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
@@ -67,6 +72,27 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    RefreshTokenService refreshTokenService;
+
+    ////refersh token
+    @PostMapping("/refreshtoken")
+    public ResponseEntity<?> refreshtoken( @RequestBody TokenRefreshRequest request) {
+        String requestRefreshToken = request.getRefreshToken();
+
+        return refreshTokenService.findByToken(requestRefreshToken)
+            .map(refreshTokenService::verifyExpiration)
+            .map(RefreshToken::getUser)
+            .map(user -> {
+            String token = jwtUtils.generateTokenFromUsername(user.getUsername());
+            return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
+            })
+            .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
+                "Refresh token is not in database!"));
+    }
+
+
+    ////
     ////pour la creation dun user
     @ApiOperation(value = "Pour la creation d'un user.")
     @PostMapping("/signup")
@@ -75,7 +101,7 @@ public class UserController {
             return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Cet nom d'utilisateur existe déjà!");
         }
     
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
+        if (signUpRequest.getEmail() !=null && signUpRequest.getEmail()!="" && userRepository.existsByEmail(signUpRequest.getEmail())) {
             return  ResponseMessage.generateResponse("Erreur",HttpStatus.BAD_REQUEST,"Erreur: Cet email existe déjà!");
         }
 
@@ -163,9 +189,12 @@ public class UserController {
         List<String> roles = userDetails.getAuthorities().stream()
             .map(item -> item.getAuthority())
             .collect(Collectors.toList());
+        
+        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+
 
         /////////////////
-        return ResponseMessage.generateResponse("ok", HttpStatus.OK, new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(),userDetails.getEmail(),userDetails.getTelephone(), userDetails.getNom(), userDetails.getPrenom(), userDetails.getPhoto(),userDetails.getPoint(),userDetails.getNiveau(),userDetails.getDateSouscription(),userDetails.getPays(), userDetails.getVille(), userDetails.getAdresse(), roles));
+        return ResponseEntity.ok(new JwtResponse(jwt,refreshToken.getToken(), userDetails.getId(), userDetails.getUsername(),userDetails.getEmail(),userDetails.getTelephone(), userDetails.getNom(), userDetails.getPrenom(), userDetails.getPhoto(),userDetails.getPoint(),userDetails.getNiveau(),userDetails.getDateSouscription(),userDetails.getPays(), userDetails.getVille(), userDetails.getAdresse(), roles));
     }
     // Fin
     
@@ -206,6 +235,20 @@ public class UserController {
     public ResponseEntity<Object> getUser(@PathVariable("id") Long id) {
         try {
             return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getUser(id));
+
+        } catch (Exception e) {
+            return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors de la recuperation.");
+        }
+    }
+    // Fin
+
+    // methode pour la recuperation d'un user a travers son numero de telephone
+    //@PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
+    @ApiOperation(value = "recuperation d'un user a travers son numero de telephone.")
+    @GetMapping("/getuser/{numero}")
+    public ResponseEntity<Object> getUserByNumero(@PathVariable("numero") String numero) {
+        try {
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, userService.getByTelephone(numero));
 
         } catch (Exception e) {
             return ResponseMessage.generateResponse("erreur", HttpStatus.OK, "Erreur lors de la recuperation.");

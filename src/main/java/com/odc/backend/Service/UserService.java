@@ -24,6 +24,9 @@ public interface UserService {
     // Methode pour retrouver un user a travers son username
     User getByUsername(String username);
 
+    // Methode pour retrouver un user a travers son telephone
+    User getByTelephone(String telephone);
+
     // Methode pour retrouver un user a travers son adresse email
     User getByEmail(String email);
 

@@ -10,6 +10,8 @@ import lombok.Setter;
 public class JwtResponse {
     
     private String token;
+    private String refreshToken;
+
     private String type = "Bearer";
     private Long id;
     private String username;
@@ -28,8 +30,9 @@ public class JwtResponse {
 
     private List<String> roles;
 
-    public JwtResponse(String accessToken, Long id, String username,String email,String telephone, String nom,String prenom, String photo,Long point, Long niveau,Date dateSouscription,String Pays, String ville,String adresse,List<String> roles) {
+    public JwtResponse(String accessToken,String refreshToken, Long id, String username,String email,String telephone, String nom,String prenom, String photo,Long point, Long niveau,Date dateSouscription,String Pays, String ville,String adresse,List<String> roles) {
         this.token = accessToken;
+        this.refreshToken = refreshToken;
         this.id = id;
         this.username = username;
         this.email = email;
