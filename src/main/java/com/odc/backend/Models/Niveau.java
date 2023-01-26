@@ -62,4 +62,8 @@ public class Niveau {
         joinColumns = @JoinColumn(name = "niveau_id"), 
         inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "niveau",cascade = CascadeType.REMOVE)
+    List<Jaime> jaimes=new ArrayList<>();
 }

@@ -56,6 +56,8 @@ public class Jeu {
 
     private Long nbreLike;
 
+    private Long nbreJoues;
+
     ////
     @JsonIgnore
     @ManyToMany(mappedBy ="jeux")

@@ -34,6 +34,11 @@ public class Jaime {
     @JoinColumn(name = "id_conseil")
     private Conseil conseil;
 
+    //
+    @ManyToOne
+    @JoinColumn(name = "id_niveau")
+    private Niveau niveau;
+
     @ManyToOne
     @JoinColumn(name = "id_user")
     private User user;
