@@ -1,5 +1,7 @@
 package com.odc.backend.Controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +37,7 @@ public class ScoreController {
  
 public ResponseEntity<?> registerScore(@RequestBody Score score) {
 
-     
+     score.setDate(new Date());
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, scoreService.saveScore(score));
     }
 
