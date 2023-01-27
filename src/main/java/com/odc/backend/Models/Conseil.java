@@ -40,6 +40,8 @@ public class Conseil {
     private String titre;
     @Lob
     private String contenu;
+
+    private String color;
     private Long nbreLike;
 
     private Date date;

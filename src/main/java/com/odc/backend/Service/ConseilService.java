@@ -3,6 +3,7 @@ package com.odc.backend.Service;
 import java.util.List;
 
 import com.odc.backend.Models.Conseil;
+import com.odc.backend.Models.User;
 
 public interface ConseilService {
     
@@ -24,7 +25,12 @@ public interface ConseilService {
     //recuperation des conseils en fonction des centres d'interets
     List<Conseil> getByUserInterets(Long id);
 
+     //recuperation des conseils en fonction dun user
+     List<Conseil> getByUser(User user);
+
     //recuperation des conseils en fonction des plus aimes
     List<Conseil> getByAimes(Long id);
+
+
 
 }

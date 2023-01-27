@@ -95,4 +95,10 @@ public class ConseilImpl implements ConseilService {
         return null;
     }
 
+    @Override
+    public List<Conseil> getByUser(User user) {
+        // TODO Auto-generated method stub
+        return conseilRepository.findByUser(user);
+    }
+
 }

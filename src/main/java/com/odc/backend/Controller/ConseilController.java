@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.odc.backend.Message.Reponse.ResponseMessage;
 import com.odc.backend.Models.Conseil;
 import com.odc.backend.Models.Problematique;
+import com.odc.backend.Models.User;
 import com.odc.backend.Service.ConseilService;
 import com.odc.backend.Service.ProblematiqueService;
+import com.odc.backend.Service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,6 +37,9 @@ public class ConseilController {
 
     @Autowired
     ProblematiqueService problematiqueService;
+
+    @Autowired
+    UserService userService;
 
     // methode pour la création d'un conseil
     @ApiOperation(value = "Création d'un conseil.")
@@ -94,5 +99,22 @@ public class ConseilController {
     public ResponseEntity<?> getByInterets(@PathVariable Long id) {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUserInterets(id));
     }
-    
+
+    //pour la recuperation du nombre de conseil d'un user
+    @ApiOperation(value = "pour la recuperation du nombre de conseil d'un user.")
+    @GetMapping("/getnombre/{idUser}")
+    public ResponseEntity<?> getNombreConseil(@PathVariable Long idUser) {
+        User user=userService.getUser(idUser);
+        
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUser(user).size());
+    }
+
+     //pour la recuperation du nombre des conseils d'un user
+     @ApiOperation(value = "Pour la recuperation du nombre des conseils d'un user.")
+     @GetMapping("/getAllConseil/{idUser}")
+     public ResponseEntity<?> getlisteConseil(@PathVariable Long idUser) {
+         User user=userService.getUser(idUser);
+         
+         return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUser(user));
+     }
 }
