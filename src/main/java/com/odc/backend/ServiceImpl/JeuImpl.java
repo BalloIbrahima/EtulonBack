@@ -11,12 +11,20 @@ import com.odc.backend.Models.Niveau;
 import com.odc.backend.Models.Score;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.JeuRepository;
+import com.odc.backend.Repository.ScoreRepository;
 import com.odc.backend.Service.JeuService;
+import com.odc.backend.Service.UserService;
 @Service
 public class JeuImpl implements JeuService {
 
     @Autowired
     JeuRepository jeuRepository;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ScoreRepository scoreRepository;
 
     @Override
     public Jeu saveJeu(Jeu jeu) {
@@ -115,6 +123,26 @@ public class JeuImpl implements JeuService {
         }
        
         return (long) likes.size();
+    }
+
+    @Override
+    public List<Jeu> getNbreJeuJou(Long id) {
+        // TODO Auto-generated method stub
+
+        User user=userService.getUser(id);
+
+        List<Score> scores=scoreRepository.findByUser(user);
+
+        List<Jeu> jList=new ArrayList<>();
+
+        for (Score score : scores) {
+            
+            if(!jList.contains(score.getNiveau().getJeu())){
+                jList.add(score.getNiveau().getJeu());
+            }
+        }
+
+        return jList;
     }
     
 }

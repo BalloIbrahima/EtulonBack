@@ -122,5 +122,12 @@ public class JeuController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getNbreLike(id));
     }
 
+    //pour la recuperation du nombre de jeux joues par un joueur
+    @ApiOperation(value = "Pour la recuperation du nombre de jeux joues par un joueur.")
+    @GetMapping("/getNbreJeu/{idUser}")
+    public ResponseEntity<?> getNbreJeuJoue(@PathVariable Long idUser) {
+
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getNbreJeuJou(idUser).size());
+    }
     
 }

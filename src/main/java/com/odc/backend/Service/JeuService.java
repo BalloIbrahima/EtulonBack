@@ -28,6 +28,9 @@ public interface JeuService {
     // Methode pour la la recuperation du nombre de jeu effectuer sur un jeu
     Long getNbreFoisJeu(Long id);
 
+    // Methode pour la la recuperation des  jeus  joues par un joueur
+    List<Jeu> getNbreJeuJou(Long id);
+
     // Methode pour la la recuperation du nombre de like dun jeu 
     Long getNbreLike(Long id);
 }
