@@ -1,0 +1,62 @@
+---
+version: "3"
+services:
+  server:
+    image: etulonbackend:latest
+    build:
+      context: .
+    restart: on-failure
+    container_name: EtulonBackend
+    ports:
+      - 8090:8091
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/etulon?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_DATASOURCE_USERNAME=etulon
+      - SPRING_DATASOURCE_PASSWORD=etulon
+  backup:
+    image: databack/mysql-backup
+    restart: always
+    volumes:
+      - /local/file/path:/db
+      - /path/to/pre-backup/scripts:/scripts.d/pre-backup
+      - /path/to/post-backup/scripts:/scripts.d/post-backup
+    environment:
+      - DB_DUMP_TARGET=/db
+      - DB_USER=etulon
+      - DB_PASS=etulon
+      - DB_DUMP_FREQ=60
+      - DB_DUMP_BEGIN=2330
+      - DB_SERVER=db
+      - DB_PORT=3307
+      
+  db:
+    image: mariadb:10.4.27
+    container_name: db
+    ports:
+      - 3307:3307
+    environment:
+      - MYSQL_ROOT_PASSWORD=etulon
+      - MYSQL_DATABASE=etulon
+      - MYSQL_USER=sa
+      - MYSQL_PASSWORD=etulon
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3307
+      PMA_ARBITRARY: 1
+      
+    restart: always
+    ports:
+      - 8081:80
+
+volumes:
+  db_data:
+

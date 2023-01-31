@@ -75,6 +75,14 @@ public class JeuController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getAllJeu());
     }
 
+    ////pour la recuperation du nombre de jeux
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
+    @ApiOperation(value = "Pour la recuperation du nombre de jeux.")
+    @GetMapping("/getnombre")
+    public ResponseEntity<?> getNombreJeux() {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getAllJeu().size());
+    }
+
     ////pour la recuperation des 20 derm=niers jeux
     //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Pour la recuperation des 20 derm=niers jeux.")

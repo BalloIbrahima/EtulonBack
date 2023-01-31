@@ -1,0 +1,5 @@
+FROM openjdk:17
+
+COPY target/backend-0.0.1-SNAPSHOT.jar BackEtulon.jar
+
+ENTRYPOINT ["java", "-jar", "/BackEtulon.jar"]
