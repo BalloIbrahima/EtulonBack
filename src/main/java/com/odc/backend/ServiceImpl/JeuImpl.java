@@ -144,5 +144,11 @@ public class JeuImpl implements JeuService {
 
         return jList;
     }
+
+    @Override
+    public List<Jeu> Last20Derniers() {
+        // TODO Auto-generated method stub
+        return jeuRepository.findTop20ByOrderByDateDesc();
+    }
     
 }

@@ -33,4 +33,7 @@ public interface JeuService {
 
     // Methode pour la la recuperation du nombre de like dun jeu 
     Long getNbreLike(Long id);
+
+    //recuperation des 20 derniers jeu
+    List<Jeu> Last20Derniers();
 }

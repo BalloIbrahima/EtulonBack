@@ -75,6 +75,14 @@ public class JeuController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getAllJeu());
     }
 
+    ////pour la recuperation des 20 derm=niers jeux
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
+    @ApiOperation(value = "Pour la recuperation des 20 derm=niers jeux.")
+    @GetMapping("/getlast")
+    public ResponseEntity<?> get20Last() {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.Last20Derniers());
+    }
+
     ////pour la recuperation des jeux en fonctions dune problematique
     //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Pour la recuperation des jeux en fonctions dune problematique.")
