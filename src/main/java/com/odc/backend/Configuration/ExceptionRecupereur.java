@@ -10,9 +10,9 @@ import com.odc.backend.Message.Reponse.ResponseMessage;
 @RestControllerAdvice
 public class ExceptionRecupereur {
 
-    // @ExceptionHandler({Exception.class})
-    // ResponseEntity<?> traiterException(Exception e){
-    //     return  ResponseMessage.generateResponse("exeption", HttpStatus.EXPECTATION_FAILED, e.getMessage());
-    // }
+    @ExceptionHandler({Exception.class})
+    ResponseEntity<?> traiterException(Exception e){
+        return  ResponseMessage.generateResponse("exeption", HttpStatus.EXPECTATION_FAILED, e.getMessage());
+    }
     
 }
