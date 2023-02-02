@@ -21,4 +21,7 @@ public interface JaimeService {
     // Methode pour la liste des jaimes à partir d'un jaime
     List<Jaime> getAllJaime();
 
+    // Methode pour la recuperation d'un jaime
+    Jaime getLikeByUserAndConseil(Long idUser, Long idConseil);
+
 }

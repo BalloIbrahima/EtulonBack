@@ -24,14 +24,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@ToString
+//@ToString
 public class Conseil {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,7 +67,7 @@ public class Conseil {
     @JoinColumn(name = "id_problematique")
     private Problematique problematique;
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "conseil",cascade = CascadeType.REMOVE)
     List<Jaime> likes=new ArrayList<>();
 

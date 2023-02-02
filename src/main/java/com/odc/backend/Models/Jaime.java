@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,10 +28,11 @@ public class Jaime {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Lob
-    private Long score;
+    // @Lob
+    // private Long score;
 
     //
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_conseil")
     private Conseil conseil;

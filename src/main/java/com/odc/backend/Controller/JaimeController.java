@@ -14,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.odc.backend.Message.Reponse.ResponseMessage;
+import com.odc.backend.Models.Conseil;
 import com.odc.backend.Models.Jaime;
+import com.odc.backend.Models.Niveau;
+import com.odc.backend.Models.User;
+import com.odc.backend.Service.ConseilService;
 import com.odc.backend.Service.JaimeService;
+import com.odc.backend.Service.NiveauService;
+import com.odc.backend.Service.UserService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,11 +36,35 @@ public class JaimeController {
     @Autowired
     JaimeService jaimeService;
 
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ConseilService conseilService;
+
+    @Autowired
+    NiveauService niveauService;
+
     // methode pour la création d'un jaime
     @ApiOperation(value = "Création d'un jaime.")
-    @PostMapping("/add")
-    public ResponseEntity<Object> creerJaime(@RequestBody Jaime jaime) {
+    @PostMapping("/addConseil/{idconseil}")
+    public ResponseEntity<Object> creerJaimeConseil(@RequestBody Jaime jaime,@PathVariable Long idconseil) {
 
+        Conseil conseil=conseilService.getConseil(idconseil);
+        jaime.setConseil(conseil);
+        return ResponseMessage.generateResponse("jaime ajoutée avec succes", HttpStatus.OK, jaimeService.saveJaime(jaime));
+
+
+    }
+    // Fin
+
+    // methode pour la création d'un jaime
+    @ApiOperation(value = "Création d'un jaime.")
+    @PostMapping("/addNiveau/{idniveau}")
+    public ResponseEntity<Object> creerJaimeNiveau(@RequestBody Jaime jaime,@PathVariable Long idniveau) {
+
+        Niveau niveau=niveauService.getNiveau(idniveau);
+        jaime.setNiveau(niveau);
         return ResponseMessage.generateResponse("jaime ajoutée avec succes", HttpStatus.OK, jaimeService.saveJaime(jaime));
 
 
@@ -57,10 +87,10 @@ public class JaimeController {
 
     ////pour la suppression d'un jaime
     @ApiOperation(value = "Pour la suppression d'un jaime.")
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteJaime(@PathVariable Long id) {
-
-        Jaime jaime=jaimeService.getJaime(id);
+    @DeleteMapping("/delete/{idUser}/{idConseil}")
+    public ResponseEntity<?> deleteJaime(@PathVariable Long idUser,@PathVariable Long idConseil) {
+        
+        Jaime jaime=jaimeService.getLikeByUserAndConseil(idUser,idConseil);
         jaimeService.deleteJaime(jaime);
 
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, "Suppression effectuee !");
@@ -72,6 +102,35 @@ public class JaimeController {
     @GetMapping("/getall")
     public ResponseEntity<?> getAlljaime() {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, jaimeService.getAllJaime());
+    }
+
+
+    ////pour la recuperation des jaimes d'un user
+    @ApiOperation(value ="Pour la recuperation des jaimes d'un users.")
+    @GetMapping("/getuser/{idUser}")
+    public ResponseEntity<?> getUsersJaime(@PathVariable Long idUser) {
+        
+        User citoyen=userService.getUser(idUser);
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, citoyen.getLikes());
+    }
+
+    ////pour la verification dun jaime a travers le conseil et le user
+    @ApiOperation(value = "Pour la verification dun jaime a travers le conseil et le user.")
+    @GetMapping("/isliked/{idUser}/{idConseil}")
+    public ResponseEntity<?> VerifyJaime(@PathVariable Long idUser,@PathVariable Long idConseil) {
+        System.out.println(idConseil);
+        System.out.println(idUser);
+
+        Jaime jaime=jaimeService.getLikeByUserAndConseil(idUser,idConseil);
+        System.out.println("here");
+        System.out.println(jaime);
+        if(jaime!=null){
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, true);
+        }else{
+            return ResponseMessage.generateResponse("ok", HttpStatus.OK, false);
+        }
+        //jaimeService.deleteJaime(jaime);
+
     }
 
 
