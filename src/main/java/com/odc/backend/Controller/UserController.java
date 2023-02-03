@@ -374,7 +374,7 @@ public class UserController {
     // methode pour jeux d'un user
     @ApiOperation(value = "Récuperation des derniers jeux d'un user.")
     //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
-    @GetMapping("/mesderniersjeux/{iduser}/{nombre}")
+    @GetMapping("/mesderniersjeux/{idUser}/{nombre}")
     public ResponseEntity<Object> MesDerniersJeux(@PathVariable Long idUser,@PathVariable Long nombre) {
 
         try {

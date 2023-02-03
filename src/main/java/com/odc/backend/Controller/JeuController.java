@@ -96,8 +96,9 @@ public class JeuController {
     @ApiOperation(value = "Pour la recuperation des jeux en fonctions dune problematique.")
     @GetMapping("/getJeux/{idProblematique}")
     public ResponseEntity<?> getJeuxForProblematique(@PathVariable Long idProblematique) {
-
+        System.out.print(idProblematique);
         Problematique problematique=problematiqueService.getProblematique(idProblematique);
+        System.out.print(problematique);
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, problematique.getJeux());
     }
 

@@ -3,6 +3,8 @@ package com.odc.backend.ServiceImpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class UserImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
+    @Autowired
+    EntityManager entityManager;
+
     @Override
     public User saveUser(User user) {
         // TODO Auto-generated method stub
@@ -34,6 +39,11 @@ public class UserImpl implements UserService {
     @Override
     public User updateUser(User user) {
         // TODO Auto-generated method stub
+
+        // User userExistant = entityManager.find(user,user.getId());
+        // entityManager.detach(entity);
+        // entity = entityManager.merge(updatedEntity);
+        // userRepository.persist(entity);
         return userRepository.save(user);
     }
 
