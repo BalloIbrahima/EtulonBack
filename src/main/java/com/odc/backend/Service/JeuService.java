@@ -19,8 +19,11 @@ public interface JeuService {
     // Methode pour la surpression d'un jeu à partir d'un jeu
     void deleteJeu(Jeu jeu);
 
-    // Methode pour la liste des jeus à partir d'un jeu
+    // Methode pour la liste des jeux
     List<Jeu> getAllJeu();
+
+    // Methode pour la liste des jeux les plux joues
+    List<Jeu> getJeuPlus(Long nombre);
 
     // Methode pour la lrecuperation des joueurs  d'un jeu
     List<User> getAllCitoyen(Long id);

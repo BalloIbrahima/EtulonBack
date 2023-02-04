@@ -150,5 +150,17 @@ public class JeuImpl implements JeuService {
         // TODO Auto-generated method stub
         return jeuRepository.findTop20ByOrderByDateDesc();
     }
+
+    @Override
+    public List<Jeu> getJeuPlus(Long nombre) {
+        // TODO Auto-generated method stub
+        List<Jeu> jeuxList=jeuRepository.findAll();
+        
+        //list tries
+        List<Jeu> jeuTries=new ArrayList<>();
+
+
+        return jeuTries;
+    }
     
 }
