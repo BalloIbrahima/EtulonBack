@@ -44,6 +44,7 @@ public class Conseil {
 
     private Date date;
 
+    private Boolean isValid;
     ///attribut specifique au type de conseil
     
     @Enumerated(EnumType.STRING)

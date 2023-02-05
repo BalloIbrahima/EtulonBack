@@ -1,15 +1,12 @@
 package com.odc.backend.ServiceImpl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.odc.backend.Models.Conseil;
-import com.odc.backend.Models.Jaime;
 import com.odc.backend.Models.Problematique;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.ConseilRepository;
