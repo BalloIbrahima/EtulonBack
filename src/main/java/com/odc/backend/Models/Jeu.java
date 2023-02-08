@@ -37,6 +37,7 @@ public class Jeu {
     private Long id;
     @Column(unique = true)
     private String nom;
+    @Lob
     private String image;
     
     private Date date;

@@ -109,12 +109,34 @@ public class ConseilController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUser(user).size());
     }
 
-     //pour la recuperation du nombre des conseils d'un user
-     @ApiOperation(value = "Pour la recuperation du nombre des conseils d'un user.")
-     @GetMapping("/getAllConseil/{idUser}")
-     public ResponseEntity<?> getlisteConseil(@PathVariable Long idUser) {
-         User user=userService.getUser(idUser);
-         
-         return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUser(user));
-     }
+    //pour la recuperation du nombre des conseils d'un user
+    @ApiOperation(value = "Pour la recuperation du nombre des conseils d'un user.")
+    @GetMapping("/getAllConseil/{idUser}")
+    public ResponseEntity<?> getlisteConseil(@PathVariable Long idUser) {
+        User user=userService.getUser(idUser);
+        
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getByUser(user));
+    }
+
+    //pour la recuperation  des conseils actives
+    @ApiOperation(value = "Pour la recuperation des conseils actives.")
+    @GetMapping("/getConseilsActives")
+    public ResponseEntity<?> getlisteConseilActive() {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getAllConseilActive());
+    }
+
+    //pour la recuperation du nombre des conseils en attentes
+    @ApiOperation(value = "Pour la recuperation  des conseils en attentes.")
+    @GetMapping("/getConseilsAttentes")
+    public ResponseEntity<?> getlisteConseilAttentes() {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getAllConseilNonActive());
+    }
+
+    //pour la recuperation du nombre des conseils en attentes
+    @ApiOperation(value = "Pour la recuperation  des conseils rejetes.")
+    @GetMapping("/getConseilsRejetes")
+    public ResponseEntity<?> getConseilsRejetes() {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, conseilService.getAllConseiltRejetes());
+    }
+
 }

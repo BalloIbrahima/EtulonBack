@@ -1,5 +1,7 @@
 package com.odc.backend.Controller;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +40,7 @@ public class JeuController {
     @ApiOperation(value = "Pour la creation d'un jeu.")
     @PostMapping("/add")
     public ResponseEntity<?> registerJeu(@RequestBody Jeu jeu) {
-
+        jeu.setDate(new Date());
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.saveJeu(jeu));
     }
 

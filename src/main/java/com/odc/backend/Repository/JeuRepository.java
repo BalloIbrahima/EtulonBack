@@ -10,4 +10,5 @@ public interface JeuRepository  extends JpaRepository<Jeu, Long>{
     Jeu findByNom(String nom);
 
     List<Jeu> findTop20ByOrderByDateDesc();
+
 }

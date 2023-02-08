@@ -98,4 +98,22 @@ public class ConseilImpl implements ConseilService {
         return conseilRepository.findByUser(user);
     }
 
+    @Override
+    public List<Conseil> getAllConseilActive() {
+        // TODO Auto-generated method stub
+        return conseilRepository.findByIsValidOrderByIdDesc(true);
+    }
+
+    @Override
+    public List<Conseil> getAllConseilNonActive() {
+        // TODO Auto-generated method stub
+        return conseilRepository.findByIsValidOrderByIdDesc(null);
+    }
+
+    @Override
+    public List<Conseil> getAllConseiltRejetes() {
+        // TODO Auto-generated method stub
+        return conseilRepository.findByIsValidOrderByIdDesc(false);
+    }
+
 }

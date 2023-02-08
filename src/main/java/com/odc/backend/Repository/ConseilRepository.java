@@ -11,4 +11,7 @@ public interface ConseilRepository extends JpaRepository<Conseil,Long>{
     List<Conseil> findByProblematique(Problematique problematique);
 
     List<Conseil> findByUser(User user);
+
+    List<Conseil> findByIsValidOrderByIdDesc(Boolean isValid);
+
 }
