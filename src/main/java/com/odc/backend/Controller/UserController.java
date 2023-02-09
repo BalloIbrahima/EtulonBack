@@ -358,7 +358,7 @@ public class UserController {
     // methode pour les preferences d'un user
     @ApiOperation(value = "Récuperation des jeux qui font parties des preferences d'un user.")
     //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
-    @GetMapping("/preferences/{iduser}")
+    @GetMapping("/preferences/{idUser}")
     public ResponseEntity<Object> MesPreferences(@PathVariable Long idUser) {
 
         try {

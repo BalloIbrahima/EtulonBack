@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.odc.backend.Models.Jeu;
@@ -19,6 +20,7 @@ public class JeuImpl implements JeuService {
 
     @Autowired
     JeuRepository jeuRepository;
+
 
     @Autowired
     UserService userService;
@@ -152,15 +154,31 @@ public class JeuImpl implements JeuService {
     }
 
     @Override
-    public List<Jeu> getJeuPlus(Long nombre) {
+    public List<Jeu> getJeuPlus() {
         // TODO Auto-generated method stub
-        List<Jeu> jeuxList=jeuRepository.findAll();
+        List<Jeu> jeuxList=jeuRepository.findTop40ByOrderByNbreJouesDesc();
         
         //list tries
-        List<Jeu> jeuTries=new ArrayList<>();
+        //List<Jeu> jeuTries=new ArrayList<>();
 
 
-        return jeuTries;
+        return jeuxList;
+    }
+
+
+
+    ////Mise a  jour des likes et nbre jeu
+    @Scheduled(fixedRateString = "PT02S")
+    public void MiseAjour() {
+        List<Jeu> jeuxList=jeuRepository.findAll();
+
+        for (Jeu jeu : jeuxList) {
+            System.out.println(getNbreFoisJeu(jeu.getId()));
+            jeu.setNbreJoues(getNbreFoisJeu(jeu.getId())); 
+            System.out.println(getNbreLike(jeu.getId()));
+            jeu.setNbreLike(getNbreLike(jeu.getId()));
+            jeuRepository.save(jeu);
+        }
     }
     
 }

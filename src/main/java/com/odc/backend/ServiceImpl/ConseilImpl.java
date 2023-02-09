@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.odc.backend.Models.Conseil;
@@ -77,7 +78,7 @@ public class ConseilImpl implements ConseilService {
     @Override
     public List<Conseil> getByAimes(Long id) {
         // TODO Auto-generated method stub
-        List<Conseil> allConseil=conseilRepository.findAll();
+        List<Conseil> allConseil=conseilRepository.findAllByOrderByNbreLikeDesc();
 
 
         // Collections.sort(allConseil, new Comparator<Conseil>() {
@@ -89,7 +90,7 @@ public class ConseilImpl implements ConseilService {
         //     }
         // });
         
-        return null;
+        return allConseil;
     }
 
     @Override
@@ -114,6 +115,18 @@ public class ConseilImpl implements ConseilService {
     public List<Conseil> getAllConseiltRejetes() {
         // TODO Auto-generated method stub
         return conseilRepository.findByIsValidOrderByIdDesc(false);
+    }
+
+    ////Mise a  jour des likes et nbre jeu
+    @Scheduled(fixedRateString = "PT01S")
+    public void MiseAjour() {
+        List<Conseil> allConseil=conseilRepository.findAll();
+ 
+        for (Conseil c : allConseil) {
+            c.setNbreLike((long) c.getLikes().size());
+            conseilRepository.save(c);
+        }
+       
     }
 
 }

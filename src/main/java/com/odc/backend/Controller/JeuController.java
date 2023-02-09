@@ -149,4 +149,12 @@ public class JeuController {
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getNbreJeuJou(idUser).size());
     }
     
+    ////pour la recuperation de toutes les jeux par ordre des plus joues
+    //@PreAuthorize ("hasRole('ROLE_ADMIN')")
+    @ApiOperation(value = "Pour la recuperation de toutes les jeux par ordre des plus joues.")
+    @GetMapping("/getBestPlayed")
+    public ResponseEntity<?> getBestPlayed() {
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, jeuService.getJeuPlus());
+    }
+
 }

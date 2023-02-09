@@ -23,13 +23,15 @@ public interface JeuService {
     List<Jeu> getAllJeu();
 
     // Methode pour la liste des jeux les plux joues
-    List<Jeu> getJeuPlus(Long nombre);
+    List<Jeu> getJeuPlus();
 
     // Methode pour la lrecuperation des joueurs  d'un jeu
     List<User> getAllCitoyen(Long id);
 
     // Methode pour la la recuperation du nombre de jeu effectuer sur un jeu
     Long getNbreFoisJeu(Long id);
+
+
 
     // Methode pour la la recuperation des  jeus  joues par un joueur
     List<Jeu> getNbreJeuJou(Long id);

@@ -52,7 +52,7 @@ public class Niveau {
     private Jeu jeu;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "niveau",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "niveau",cascade = CascadeType.REMOVE)
     List<Score> scores=new ArrayList<>();
     
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)

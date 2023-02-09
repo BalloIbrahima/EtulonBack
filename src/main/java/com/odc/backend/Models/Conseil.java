@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,7 +69,7 @@ public class Conseil {
     private Problematique problematique;
 
 
-    @OneToMany(mappedBy = "conseil",cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "conseil",cascade = CascadeType.REMOVE)
     List<Jaime> likes=new ArrayList<>();
 
     @ManyToOne
