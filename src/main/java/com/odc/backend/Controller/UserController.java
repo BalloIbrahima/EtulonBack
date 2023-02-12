@@ -44,6 +44,7 @@ import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Repository.UserRepository;
 import com.odc.backend.Service.UserService;
+import com.odc.backend.Service.JeuService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -74,6 +75,9 @@ public class UserController {
 
     @Autowired
     RefreshTokenService refreshTokenService;
+
+    @Autowired
+    JeuService jeuService;
 
     ////refersh token
     @PostMapping("/refreshtoken")
@@ -386,5 +390,50 @@ public class UserController {
 
     }
     // Fin
+
+    // methode pour la recuperation du nombre de citoyen ayany deja joues aux jeux
+    @ApiOperation(value = "KMethode pour la recuperation du nombre de citoyen ayany deja joues aux jeux.")
+    //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
+    @GetMapping("/nombre/ayentjoues")
+    public ResponseEntity<Object> NombreJouersAyantJoues() {
+
+        Role citoyen=roleRepository.findByName(ERole.ROLE_CITOYEN);
+        List<User> citoyenslist=citoyen.getUsers();
+
+        List<User> userPlayes=new ArrayList<>();
+
+        for (User user : citoyenslist) {
+            if(jeuService.getNbreJeuJou(user.getId()).size()!=0L){
+                userPlayes.add(user);
+            }
+        }
+       
+     
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK,  (long) userPlayes.size());
+      
+    }
+    // Fin
+
+     // methode pour la recuperation du nombre de citoyen ayany deja donnees  des conseils
+     @ApiOperation(value = "KMethode pour la recuperation du nombre de citoyen ayany deja donnees  des conseils.")
+     //@PreAuthorize ("hasRole('ROLE_SUPERADMIN')")
+     @GetMapping("/nombre/ayentconseils")
+     public ResponseEntity<Object> NombreJouersAyantConseil() {
+      
+        Role citoyen=roleRepository.findByName(ERole.ROLE_CITOYEN);
+        List<User> citoyenslist=citoyen.getUsers();
+
+        List<User> userConseils=new ArrayList<>();
+
+        for (User user : citoyenslist) {
+            if(user.getConseils().size()!=0L){
+                userConseils.add(user);
+            }
+        }
+         
+        return ResponseMessage.generateResponse("ok", HttpStatus.OK, (long) userConseils.size());
+       
+     }
+     // Fin
 
 }

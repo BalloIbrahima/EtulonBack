@@ -17,6 +17,7 @@ import com.odc.backend.Models.Score;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Repository.UserRepository;
+import com.odc.backend.Service.JeuService;
 import com.odc.backend.Service.UserService;
 @Service
 public class UserImpl implements UserService {
@@ -27,8 +28,7 @@ public class UserImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
-    @Autowired
-    EntityManager entityManager;
+    
 
     @Override
     public User saveUser(User user) {
@@ -159,6 +159,5 @@ public class UserImpl implements UserService {
         // TODO Auto-generated method stub
         return userRepository.findByTelephone(telephone);
     }
-
     
 }

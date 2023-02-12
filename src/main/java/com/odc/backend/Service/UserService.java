@@ -42,6 +42,14 @@ public interface UserService {
     //Nombre de citoyen
     Long NombreCitoyen();
 
+    
+    // // methode pour la recuperation du nombre de citoyen ayany deja joues aux jeux
+    // Long NombreJouersAyantJoues();
+
+    // // methode pour la recuperation du nombre de citoyen ayany deja donnees  des conseils
+    // Long NombreJouersAyantConseil();
+
+
     List<Jeu> MesJeuxPreferes(Long idUser);
 
     List<Jeu> MesDerniersjeux(Long idUser, Long nombre);

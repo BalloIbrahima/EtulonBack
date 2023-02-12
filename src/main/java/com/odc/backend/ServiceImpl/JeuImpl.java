@@ -119,7 +119,7 @@ public class JeuImpl implements JeuService {
         }
 
         for (Score score : sList) {
-            if(score.getIsLiked()==true){
+            if(score.getIsLiked()==true ){
                 likes.add(score);
             }
         }
@@ -173,10 +173,35 @@ public class JeuImpl implements JeuService {
         List<Jeu> jeuxList=jeuRepository.findAll();
 
         for (Jeu jeu : jeuxList) {
-            System.out.println(getNbreFoisJeu(jeu.getId()));
-            jeu.setNbreJoues(getNbreFoisJeu(jeu.getId())); 
-            System.out.println(getNbreLike(jeu.getId()));
-            jeu.setNbreLike(getNbreLike(jeu.getId()));
+
+            List<Niveau> nList=jeu.getNiveaux();
+
+            List<Score> sList=new ArrayList<>();
+    
+            List<Score> likes=new ArrayList<>();
+    
+    
+            for (Niveau n : nList) {
+                sList.addAll(n.getScores());
+            }
+    
+            for (Score score : sList) {
+                if(score.getIsLiked()==true ){
+                    likes.add(score);
+                }
+            }
+           
+           
+            System.out.println( (long) likes.size());
+
+
+
+            jeu.setNbreJoues( (long) sList.size()); 
+        
+            
+           
+            System.out.println( (long) sList.size());
+            jeu.setNbreLike( (long) likes.size());
             jeuRepository.save(jeu);
         }
     }
