@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.odc.backend.Models.ERole;
@@ -17,7 +19,6 @@ import com.odc.backend.Models.Score;
 import com.odc.backend.Models.User;
 import com.odc.backend.Repository.RoleRepository;
 import com.odc.backend.Repository.UserRepository;
-import com.odc.backend.Service.JeuService;
 import com.odc.backend.Service.UserService;
 @Service
 public class UserImpl implements UserService {
@@ -28,7 +29,9 @@ public class UserImpl implements UserService {
     @Autowired
     RoleRepository roleRepository;
 
-    
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Override
     public User saveUser(User user) {
@@ -37,14 +40,26 @@ public class UserImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user) {
+    public User updateUser(User a) {
         // TODO Auto-generated method stub
 
-        // User userExistant = entityManager.find(user,user.getId());
-        // entityManager.detach(entity);
-        // entity = entityManager.merge(updatedEntity);
-        // userRepository.persist(entity);
-        return userRepository.save(user);
+        User User = userRepository.findById(a.getId()).get();
+
+        User log = userRepository.findByUsernameAndPassword(a.getUsername(), a.getPassword());
+
+        if (log == null) {
+            System.out.println("non null");
+
+            a.setPassword(passwordEncoder().encode(a.getPassword()));
+
+        } else {
+            System.out.println(" null");
+
+            a.setPassword(User.getPassword());
+
+        }
+        return userRepository.save(a);
+        //return userRepository.save(user);
     }
 
     @Override

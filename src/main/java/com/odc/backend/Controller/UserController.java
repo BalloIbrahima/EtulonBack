@@ -245,7 +245,6 @@ public class UserController {
         }
     }
     // Fin
-
     // methode pour la recuperation d'un user a travers son numero de telephone
     //@PreAuthorize ("hasRole('ROLE_ADMIN','ROLE_CITOYEN')")
     @ApiOperation(value = "recuperation d'un user a travers son numero de telephone.")

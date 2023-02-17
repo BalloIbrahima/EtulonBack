@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long>{
     User findByTelephone(String telephone);
     ///par role
     //List<User> findByRoles(Set<Role> roles);
+
+    User findByUsernameAndPassword(String username, String password);
 }

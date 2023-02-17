@@ -71,7 +71,8 @@ public class NotificationController {
     //@PreAuthorize ("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "Pour la recuperation de toutes les jeux.")
     @GetMapping("/getall")
-    public ResponseEntity<?> getAllNotifictaions() {
+    public ResponseEntity<?> getAllNotifictaions() throws InterruptedException {
+        //Thread.sleep(1000);
         return ResponseMessage.generateResponse("ok", HttpStatus.OK, notificationService.getAllNotification());
     }    
     
