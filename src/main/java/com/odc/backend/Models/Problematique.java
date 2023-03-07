@@ -50,6 +50,7 @@ public class Problematique {
     @JoinColumn(name = "id_user")
     private User user;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinTable(  name = "jeu_problematique", 
         joinColumns = @JoinColumn(name = "problematique_id"), 

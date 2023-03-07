@@ -59,7 +59,7 @@ public class Jeu {
     private Long nbreJoues;
 
     ////
-    @JsonIgnore
+    //@JsonIgnore
     @ManyToMany(mappedBy ="jeux")
     List<Problematique> problematiques=new ArrayList<>();
 
